@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 
 public class FXMLDocumentController {
     
-    private File file = new File("words.txt");
+    private File file = new File("src/assets/words.txt");
     private Scanner fileReader;
     
     @FXML
