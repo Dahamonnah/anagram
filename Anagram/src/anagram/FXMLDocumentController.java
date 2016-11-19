@@ -5,31 +5,67 @@
  */
 package anagram;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import anagram.List.LinkedList;
+import static anagram.Test.sortWord;
+import java.io.File;
+import java.util.Scanner;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
-/**
- *
- * @author Dahamonnah
- */
-public class FXMLDocumentController implements Initializable {
+
+public class FXMLDocumentController {
+    
+    private File file = new File("words.txt");
+    private Scanner fileReader;
     
     @FXML
-    private Label label;
+    private TextField textField;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+    private ListView<String> listView;
+
+    @FXML
+    void handleButtonAction(ActionEvent event) throws Exception {
+        fileReader = new Scanner(file);
+        ObservableList<String> list = FXCollections.observableArrayList();
+        String word = textField.getText().trim();
+        
+        long t1 = System.currentTimeMillis();
+        
+        if(word.equals("s2b")){
+            for (int i = 0; i < 7; i++) {
+                list.add("s2b, our lord and saviour");
+            }
+        }
+        else if(word.equalsIgnoreCase("manny")){
+            for (int i = 0; i < 7; i++) {
+                list.add("creator of our lord and saviour");
+            }
+        }
+        else if(word.equalsIgnoreCase("kamal")){
+            for (int i = 0; i < 7; i++) {
+                list.add("two habbas");
+            }
+        }
+        else{
+            while(fileReader.hasNext()){
+                String currentWord = fileReader.nextLine();
+                if(sortWord(word).equals(sortWord(currentWord)) && !word.equals(currentWord)){
+                    list.add(currentWord);
+                }
+            }
+        }
+        
+        
+        listView.setItems(list);
+        
+        System.out.println("Time: " + (System.currentTimeMillis() - t1) / 1000.0);
+        System.out.println("# of anagrams: " + list.size());
+
     }
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+
 }
