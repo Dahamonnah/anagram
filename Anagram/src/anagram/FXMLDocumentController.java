@@ -1,39 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package anagram;
 
+import anagram.List.LinkedList;
 import static anagram.Test.sortWord;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.Scanner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 
 public class FXMLDocumentController {
     
-    private File file = new File("src/assets/words.txt");
-    private Scanner fileReader;
+    private FileReader file;
+    //private Scanner fileReader;
+    private BufferedReader fileReader;
     
     @FXML
     private TextField textField;
     
     @FXML
     private ListView<String> listView;
-    
-    @FXML
-    private Label label1;
 
     @FXML
     void handleButtonAction(ActionEvent event) throws Exception {
-        fileReader = new Scanner(file);
+        file = new FileReader("src/assets/words.txt");
+        fileReader = new BufferedReader(file);
         ObservableList<String> list = FXCollections.observableArrayList();
         String word = textField.getText().trim();
         
@@ -55,9 +52,9 @@ public class FXMLDocumentController {
             }
         }
         else{
-            while(fileReader.hasNext()){
-                String currentWord = fileReader.nextLine();
-                if(sortWord(word).equals(sortWord(currentWord)) && !word.equals(currentWord)){
+            String currentWord;
+            while((currentWord = fileReader.readLine()) != null){
+                if(currentWord.length() == word.length() && sortWord(word).equals(sortWord(currentWord)) && !word.equals(currentWord)){
                     list.add(currentWord);
                 }
             }
@@ -65,11 +62,9 @@ public class FXMLDocumentController {
         
         
         listView.setItems(list);
-        label1.setText(list.size() + (list.size() == 1 ? " anagram found" : " anagrams found"));
         
         System.out.println("Time: " + (System.currentTimeMillis() - t1) / 1000.0);
         System.out.println("# of anagrams: " + list.size());
 
     }
-
 }
