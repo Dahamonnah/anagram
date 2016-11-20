@@ -5,7 +5,6 @@
  */
 package anagram;
 
-import anagram.List.LinkedList;
 import static anagram.Test.sortWord;
 import java.io.File;
 import java.util.Scanner;
@@ -13,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
@@ -27,6 +27,9 @@ public class FXMLDocumentController {
     
     @FXML
     private ListView<String> listView;
+    
+    @FXML
+    private Label label1;
 
     @FXML
     void handleButtonAction(ActionEvent event) throws Exception {
@@ -62,6 +65,7 @@ public class FXMLDocumentController {
         
         
         listView.setItems(list);
+        label1.setText(list.size() + (list.size() == 1 ? " anagram found" : " anagrams found"));
         
         System.out.println("Time: " + (System.currentTimeMillis() - t1) / 1000.0);
         System.out.println("# of anagrams: " + list.size());
