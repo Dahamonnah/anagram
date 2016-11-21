@@ -82,4 +82,9 @@ public class FXMLDocumentController {
         System.out.println("Time: " + (System.currentTimeMillis() - t1) / 1000.0);
 
     }
+    
+    @FXML
+    void handleTextfieldAction(ActionEvent event) throws Exception{
+        handleButtonAction(event);
+    }
 }
