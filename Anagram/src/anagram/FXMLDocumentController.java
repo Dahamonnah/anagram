@@ -69,16 +69,6 @@ public class FXMLDocumentController {
         listView.setItems(list);
         label1.setText(list.size() + (list.size() == 1? " anagram found" : " anagrams found"));
         
-        int x;
-        if(list.size() > 0){
-            x = 3;
-        }
-        else{
-            x = -3;
-        }
-        
-        int y = list.size() > 0? 3 : -3; 
-        
         System.out.println("Time: " + (System.currentTimeMillis() - t1) / 1000.0);
 
     }
