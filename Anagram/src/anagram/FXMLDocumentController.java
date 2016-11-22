@@ -59,7 +59,7 @@ public class FXMLDocumentController {
         else{
             String currentWord;
             while((currentWord = fileReader.readLine()) != null){
-                if(currentWord.length() == word.length() && sortWord(word).equals(sortWord(currentWord)) && !word.equals(currentWord)){
+                if(currentWord.length() == word.length() && sortWord(word).equalsIgnoreCase(sortWord(currentWord)) && !word.equalsIgnoreCase(currentWord)){
                     list.add(currentWord);
                 }
             }
