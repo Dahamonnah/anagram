@@ -1,9 +1,9 @@
 
 package anagram;
 
-import static anagram.Test.sortWord;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Arrays;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -76,5 +76,11 @@ public class FXMLDocumentController {
     @FXML
     void handleTextfieldAction(ActionEvent event) throws Exception{
         handleButtonAction(event);
+    }
+    
+    public static String sortWord(String word){
+        char[] chars = word.toCharArray();
+        Arrays.sort(chars);
+        return new String(chars);
     }
 }
